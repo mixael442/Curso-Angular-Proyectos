@@ -1,0 +1,74 @@
+<h1>Reactivos <small>Dinamicos</small></h1>
+<hr>
+
+<form [formGroup]="miFormulario" (ngSubmit)="guardar()">
+
+
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">nombre</label>
+        <div class="col-sm-9">
+            <input type="text"
+                    class="form-control" 
+                    formControlName="nombre">
+        <span class="form-text text-danger" *ngIf="campoNoValido('nombre')">Campo obligatorio</span>
+        </div>
+    </div>
+
+
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">agregar</label>
+        <div class="col-sm-9">
+            <div class="input-group">
+                <input class="form-control" 
+                       
+                       >
+
+                <button class="btn btn-primary"
+                        
+                        >
+                    agregar
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Favoritos</label>
+        <div class="col-sm-9">
+            <div class="input-group mb-1" formArrayName="favoritos"
+                 *ngIf="let favorito of favoritosarr.controls, let i = index">
+                <input class="form-control mb-1" 
+                       [formControlName]="i">
+                    <button class="btn btn-outline-danger"
+                            type="button"
+                               >
+                               Eliminar
+                    </button>
+            </div>
+        </div>
+    </div>
+                       
+
+
+    <div class=" row">
+        <div class="col-sm-12">
+            <button type="submit"
+                    class="btn btn-primary float-end"
+                    (click)="guardar()"
+                    >
+            Guardar
+            </button>
+        </div>
+    </div>
+
+
+</form>
+
+<span>Valid</span>
+<pre>{{miFormulario.valid}}</pre>
+
+<div>
+    <span>form</span>
+    <pre>{{miFormulario.value | json}}</pre>
+</div>
